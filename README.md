@@ -11,5 +11,5 @@ Le but est donc de :
  - [**M. Michotte**](https://github.com/MMichotte)
  - [**O. Niyonkuru**](https://github.com/danny00747)
  - [**M. Valentin**](https://github.com/momo007Dev)
- - [**P. Tchoupe**](https://github.com/)
+ - [**P. Tchoupe**](https://github.com/PatrickTchoupe)
  - [**T. Tekadam**](https://github.com/)
