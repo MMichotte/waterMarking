@@ -10,12 +10,24 @@ solution :
 - supprimer le son à une fréquence X
 - ajouter notre WM à cette fréquence X
 
+
+%attention : son max de 24h! => 32 premier bits du WM = temps du son
+
 %}
 
 watermark('sounds/troll.mp3');
 %watermark('sounds/saucisse.mp3'); 
 
-function watermark(file_path)
+function status = watermark(file_path)
+    %-----------------------------------
+    %-- Watermark configuration :
+    prefixLen = 50; %soit max 24h de son
+    prefixAmplitude = 0.001;
+    wm_freq = 0.5; % must be below 20Hz to not be hearable by a human. 
+    wm_amplitude = 0.5;
+    Fc = 10; % LowPass Filter freq
+    save('src/watermark.mat','wm_freq','wm_amplitude','Fc','prefixLen','prefixAmplitude');
+    
     %-----------------------------------
     %-- Parsing file path
     [filePath,fileName] = fileparts(file_path);
@@ -26,7 +38,14 @@ function watermark(file_path)
     input_sig = s(:,1)';
     input_sig_lenght = length(input_sig);
     input_sig_duration = input_sig_lenght/Fs;
+    input_sig_duration_ms = fix(input_sig_duration*10000);
+    input_sig_duration_ms_bin = de2bi(input_sig_duration_ms,prefixLen,'right-msb');
     %sound(input_sig,Fs);
+    
+    if input_sig_duration >= 24*3600
+        status = 'ERROR: signal must be < than 24h!'
+        return
+    end
     
     %{
     %-- spectrogram
@@ -48,16 +67,16 @@ function watermark(file_path)
     %-- Creating Watermark signal :
     t = 0:1/Fs:input_sig_duration;
     t = t(1:length(t)-1);
-    wm_freq = 0.5; % must be below 20Hz to not be hearable by a human. 
-    wm_amplitude = 0.5;
     wm_sig = wm_amplitude * sin(2*pi*wm_freq.*t);
-
+    
+    %-- add prefix data :
+    wm_sig = [input_sig_duration_ms_bin*prefixAmplitude,wm_sig];
+       
     %%-----------------------------------
     %-- Cleaning input sound at WM frequency :
-    Fc = 10; %Frequence de coupure 
     [b,a] = butter(5,Fc/(Fs/2),'high');
     %freqz(b,a)
-    save('src/watermark.mat','wm_freq','wm_sig','Fc');
+    
 
     %-- Applying filter
     filtered_input_sig = filter(b,a,input_sig);
@@ -66,8 +85,9 @@ function watermark(file_path)
 
     %-----------------------------------
     %-- Applying Watermark :
+    filtered_input_sig = [zeros(1,prefixLen),filtered_input_sig];
     output_sig = filtered_input_sig + wm_sig;
-    sound(output_sig,Fs);
+    %sound(output_sig,Fs);
 
     %{
     figure()
@@ -88,4 +108,5 @@ function watermark(file_path)
     %-- Outputing watermarked sound :
     
     audiowrite(sprintf('sounds/output/%s.wav',fileName),output_sig,Fs);
+    status = 'Signal successfully marked!'
 end
