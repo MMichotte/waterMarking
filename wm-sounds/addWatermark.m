@@ -6,6 +6,10 @@ Objectif :
 Modifier tous les n bits du signal d'entrée par un bit du WM et ce
 à une fréquence donnée du signal (par exemple 0.5Hz). 
 
+solution : 
+- supprimer le son à une fréquence X
+- ajouter notre WM à cette fréquence X
+
 %}
 
 
@@ -19,7 +23,7 @@ input_sig_duration = input_sig_lenght/Fs;
 %sound(input_sig,Fs);
 
 %spectrogram
-figure(1)
+figure()
 spectrogram(input_sig,1024,[],1024,Fs,'yaxis');
 
 %fft
@@ -29,8 +33,8 @@ P1 = P2(1:input_sig_lenght/2+1);
 P1(2:end-1) = 2*P1(2:end-1);
 
 f = Fs*(0:(input_sig_lenght/2))/input_sig_lenght;
-figure(2)
-plot(f,P1);
+%figure()
+%plot(f,P1);
 
 %-----------------------------------
 % Creating Watermark signal :
@@ -39,26 +43,39 @@ t = t(1:length(t)-1);
 %f_wm = linspace(1000,10000,length(t)); %Hz
 wm_freq = 0.5; %must be below 20Hz to not be hearable by a human. 
 wm_amplitude = 0.5;
+wm_df = 0.4;
 wm_sig = wm_amplitude * sin(2*pi*wm_freq.*t);
-save('watermark.mat','wm_freq','wm_sig');
+save('watermark.mat','wm_freq','wm_sig','wm_df');
+
+%-----------------------------------
+% Cleaning input sound at WM frequency :
+%Fc = [wm_freq-wm_df,wm_freq+wm_df];
+Fc = 10;
+[b,a] = butter(5,Fc/(Fs/2),'high');
+freqz(b,a)
+
+% Applying filter
+filtered_input_sig = filter(b,a,input_sig);
+figure()
+spectrogram(filtered_input_sig,1024,[],1024,Fs,'yaxis');
 
 %-----------------------------------
 % Applying Watermark :
-output_sig = input_sig + wm_sig;
+output_sig = filtered_input_sig + wm_sig;
 sound(output_sig,Fs);
 
-figure(3)
+figure()
 spectrogram(output_sig,1024,[],1024,Fs,'yaxis');
 
 %fft
-input_fft = fft(input_sig);
+input_fft = fft(filtered_input_sig);
 P2 = abs(input_fft/input_sig_lenght);
 P1 = P2(1:input_sig_lenght/2+1);
 P1(2:end-1) = 2*P1(2:end-1);
 
 f = Fs*(0:(input_sig_lenght/2))/input_sig_lenght;
-figure(4)
-plot(f,P1);
+%figure()
+%plot(f,P1);
 
 
 %-----------------------------------

@@ -4,44 +4,49 @@ load('watermark.mat');
 
 %-----------------------------------
 % Retrieving Input Signal 
-[s2,Fs2] = audioread('sounds/output.wav');
-input_sig2 = s2(:,1)';
-input_sig2_lenght = length(input_sig2);
-input_sig2_duration = input_sig2_lenght/Fs2;
+%[s,Fs] = audioread('sounds/modified/output_notModified.wav');
+[s,Fs] = audioread('sounds/modified/output_inverted.wav');
+input_sig = s(:,1)';
+input_sig_lenght = length(input_sig);
+input_sig_duration = input_sig_lenght/Fs;
 
 
 %-----------------------------------
 % Retrieving watermark from signal
 % Creating bandpass filter
-[b,a] = butter(4,[wm_freq-0.1,wm_freq+0.1],'bandpass');
+Fc = 10;
+[b,a] = butter(4,Fc/(Fs/2),'low');
 
 % Applying filter
-WM = filter(b,a,input_sig2);
+WM = filter(b,a,input_sig)';
+wm_sig = wm_sig';
 
-% Check Correlation 
-[c,lags] = xcorr(wm_sig,WM);
-
-figure(1)
-stem(lags,c);
-
-
-% Retrieving Input Signal 
-[s2,Fs2] = audioread('sounds/output2.wav');
-input_sig2 = s2(:,1)';
-input_sig2_lenght = length(input_sig2);
-input_sig2_duration = input_sig2_lenght/Fs2;
-
+%{
+figure();
+spectrogram(WM,1024,[],1024,Fs,'yaxis');
+figure();
+spectrogram(wm_sig,1024,[],1024,Fs,'yaxis');
+%}
 
 %-----------------------------------
-% Retrieving watermark from signal
-% Creating bandpass filter
-[b,a] = butter(4,[wm_freq-0.1,wm_freq+0.1],'bandpass');
-
-% Applying filter
-WM = filter(b,a,input_sig2);
-
 % Check Correlation 
-[c,lags] = xcorr(wm_sig,WM);
 
-figure(2)
-stem(lags,c);
+%[c,lags] = xcorr(wm_sig,WM);
+%figure();
+%stem(lags,c);
+
+try
+    correlation = corrcoef(wm_sig,WM);
+    lowestCorr = min(correlation)
+    if lowestCorr(1) < 0.99
+        fprintf('the signal has been altered !\n');
+    else
+        fprintf('the signal is authentic !\n');
+    end
+catch error
+    fprintf('the signal has been altered !\n');
+end
+
+
+
+
