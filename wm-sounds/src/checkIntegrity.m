@@ -1,16 +1,9 @@
-clear all; close all; clc;
-
-a = integrityCheck('sounds/modified/troll_inverted.wav')
-b = integrityCheck('sounds/modified/troll_echo.wav')
-c = integrityCheck('sounds/modified/troll_amplified.wav')
-d = integrityCheck('sounds/modified/troll_accelerated.wav')
-e = integrityCheck('sounds/modified/troll_shorten.wav')
-f = integrityCheck('sounds/modified/troll_unchanged.wav')
-g = integrityCheck('sounds/output/troll.wav')
-
-
-function result = integrityCheck(filePath)
-    load('src/watermark.mat');
+function result = checkIntegrity(filePath)
+    %-----------------------------------
+    %-- Imports
+    load('src/config/watermark.mat');
+    addpath('src/helpers/');
+    
     %-----------------------------------
     % Retrieving Input Signal 
     [s,Fs] = audioread(filePath);
@@ -39,20 +32,13 @@ function result = integrityCheck(filePath)
     % Applying filter
     wm_extracted = filter(b,a,signal)';
     
-    %{
-    figure();
-    spectrogram(WM,1024,[],1024,Fs,'yaxis');
-    figure();
-    spectrogram(wm_sig,1024,[],1024,Fs,'yaxis');
-    %}
-
+    %showSpectrum(wm_extracted,Fs);
+    %showSpectrum(wm_sig,Fs);
+   
     %-----------------------------------
     % Check Correlation 
-
-    %[c,lags] = xcorr(wm_sig,WM);
-    %figure();
-    %stem(lags,c);
-
+    %showCorr(wm_extracted,wm_sig);
+    
     try
         correlation = corrcoef(wm_sig,wm_extracted);
         lowestCorr = min(correlation);

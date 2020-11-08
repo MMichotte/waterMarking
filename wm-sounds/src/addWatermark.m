@@ -1,32 +1,8 @@
-clear all; close all; clc;
-
-%{
-Objectif : 
-
-Modifier tous les n bits du signal d'entrée par un bit du WM et ce
-à une fréquence donnée du signal (par exemple 0.5Hz). 
-
-solution : 
-- supprimer le son à une fréquence X
-- ajouter notre WM à cette fréquence X
-
-
-%attention : son max de 24h! => 32 premier bits du WM = temps du son
-
-%}
-
-watermark('sounds/troll.mp3');
-%watermark('sounds/saucisse.mp3'); 
-
-function status = watermark(file_path)
+function status = addWatermark(file_path)
     %-----------------------------------
-    %-- Watermark configuration :
-    prefixLen = 50; %soit max 24h de son
-    prefixAmplitude = 0.001;
-    wm_freq = 0.5; % must be below 20Hz to not be hearable by a human. 
-    wm_amplitude = 0.5;
-    Fc = 10; % LowPass Filter freq
-    save('src/watermark.mat','wm_freq','wm_amplitude','Fc','prefixLen','prefixAmplitude');
+    %-- Imports
+    load('src/config/watermark.mat');
+    addpath('src/helpers/');
     
     %-----------------------------------
     %-- Parsing file path
@@ -40,28 +16,15 @@ function status = watermark(file_path)
     input_sig_duration = input_sig_lenght/Fs;
     input_sig_duration_ms = fix(input_sig_duration*10000);
     input_sig_duration_ms_bin = de2bi(input_sig_duration_ms,prefixLen,'right-msb');
-    %sound(input_sig,Fs);
     
     if input_sig_duration >= 24*3600
-        status = 'ERROR: signal must be < than 24h!'
+        status = 'ERROR: signal must be < than 24h!';
         return
     end
     
-    %{
-    %-- spectrogram
-    figure()
-    spectrogram(input_sig,1024,[],1024,Fs,'yaxis');
-
-    %-- fft
-    input_fft = fft(input_sig);
-    P2 = abs(input_fft/input_sig_lenght);
-    P1 = P2(1:input_sig_lenght/2+1);
-    P1(2:end-1) = 2*P1(2:end-1);
-
-    f = Fs*(0:(input_sig_lenght/2))/input_sig_lenght;
-    figure()
-    plot(f,P1);
-    %}
+    %sound(input_sig,Fs);
+    %showSpectrum(input_sig,Fs);
+    %showFFT(input_sig,Fs);
     
     %-----------------------------------
     %-- Creating Watermark signal :
@@ -80,33 +43,20 @@ function status = watermark(file_path)
 
     %-- Applying filter
     filtered_input_sig = filter(b,a,input_sig);
-    %figure()
-    %spectrogram(filtered_input_sig,1024,[],1024,Fs,'yaxis');
+    %showSpectrum(filtered_input_sig,Fs);
 
     %-----------------------------------
     %-- Applying Watermark :
     filtered_input_sig = [zeros(1,prefixLen),filtered_input_sig];
     output_sig = filtered_input_sig + wm_sig;
+    
     %sound(output_sig,Fs);
-
-    %{
-    figure()
-    spectrogram(output_sig,1024,[],1024,Fs,'yaxis');
-
-    %fft
-    input_fft = fft(filtered_input_sig);
-    P2 = abs(input_fft/input_sig_lenght);
-    P1 = P2(1:input_sig_lenght/2+1);
-    P1(2:end-1) = 2*P1(2:end-1);
-
-    f = Fs*(0:(input_sig_lenght/2))/input_sig_lenght;
-    figure()
-    plot(f,P1);
-    %}
+    %showSpectrum(output_sig,Fs);
+    %showFFT(output_sig,Fs);
 
     %-----------------------------------
     %-- Outputing watermarked sound :
     
     audiowrite(sprintf('sounds/output/%s.wav',fileName),output_sig,Fs);
-    status = 'Signal successfully marked!'
+    status = 'Signal successfully marked!';
 end
