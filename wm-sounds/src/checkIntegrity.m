@@ -55,9 +55,3 @@ function result = checkIntegrity(filePath)
         return
     end
 end
-
-
-
-
-
-
