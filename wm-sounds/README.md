@@ -19,8 +19,8 @@
 3. Re-création du watermark avec les configurations standard et les données décodées.
 4. Application d'un filtre pass-bas sur le signal d'entrée afin d'en extraire le watermark.
 5. Corrélation entre le watermark original et le watermark extrait du signal.
-   - ✅ Si le taux de correlation est **>= 99%** alors on considère le signal comme étant **authentique**.
-   - ❌ Si le taux de correlation est **< 99%** alors on considère le signal comme étant **non-authentique**. 
+   - ✅ Si le taux de correlation est **>= 0.99** alors on considère le signal comme étant **authentique**.
+   - ❌ Si le taux de correlation est **< 0.99** alors on considère le signal comme étant **non-authentique**. 
 
 
 ## Utilisation :
