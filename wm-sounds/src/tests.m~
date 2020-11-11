@@ -11,5 +11,5 @@ checkIntegrity('sounds/SchemingWeasel_short_wm_shorten.wav')
 checkIntegrity('sounds/SchemingWeasel_short_wm_speed.wav')
 
 addWatermark('sounds/troll.mp3')
-checkIntegrity('sounds/troll_wm.wav')
-checkIntegrity('sounds/troll_wm_distorted.mp3')
+checkIntegrity('sounds/SchemingWeasel_short_wm_speed.wav')
+checkIntegrity('sounds/troll.mp3')

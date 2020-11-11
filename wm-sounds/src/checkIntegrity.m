@@ -8,41 +8,42 @@ function result = checkIntegrity(filePath)
     % Retrieving Input Signal 
     [s,Fs] = audioread(filePath);
     input_sig = s(:,1)';
-    
+  
     % Retrieving prefix information
     prefix = int16(input_sig(1,1:prefixLen)*1/prefixAmplitude);
+    prefix = prefix./max(prefix);
     signal = input_sig(1,prefixLen+1:end);
     try 
         sig_initial_duration = bi2de(prefix);
-        sig_initial_duration = double(sig_initial_duration) / 10000;
+        sig_initial_duration = double(sig_initial_duration) / 1000000;
     catch error
+        %fprintf('error at stage 1 :'); disp(error);
         result = 'the signal has been altered !';
         return
     end
-    
+ 
     % Recreating original watermark:
     t = 0:1/Fs:sig_initial_duration;
     wm_sig = wm_amplitude * sin(2*pi*wm_freq.*t);
     
     %-----------------------------------
     % Retrieving watermark from signal
-    % Creating bandpass filter
-    [b,a] = butter(4,Fc/(Fs/2),'low');
+    % Creating passe-bas filter
+    [b,a] = butter(5,Fc/(Fs/2),'low');
 
     % Applying filter
-    wm_extracted = filter(b,a,signal)';
+    wm_extracted = filter(b,a,signal);
     
     %showSpectrum(wm_extracted,Fs);
     %showSpectrum(wm_sig,Fs);
    
     %-----------------------------------
     % Check Correlation 
-    %showCorr(wm_extracted,wm_sig);
     
     try
-        correlation = corrcoef(wm_sig,wm_extracted);
-        lowestCorr = min(correlation);
-        if lowestCorr(1) < 0.99
+        %showCorr(wm_extracted,wm_sig);
+        correlation = corr2(wm_sig,wm_extracted);
+        if correlation(1) < 0.98
             result = 'the signal has been altered !';
             return
         else
@@ -50,7 +51,7 @@ function result = checkIntegrity(filePath)
             return
         end
     catch error
-        %disp(error);
+        %fprintf('error at stage 2 :'); disp(error);
         result = 'the signal has been altered !';
         return
     end

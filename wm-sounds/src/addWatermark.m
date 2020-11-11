@@ -14,11 +14,11 @@ function status = addWatermark(file_path)
     input_sig = s(:,1)';
     input_sig_lenght = length(input_sig);
     input_sig_duration = input_sig_lenght/Fs;
-    input_sig_duration_ms = fix(input_sig_duration*10000);
-    input_sig_duration_ms_bin = de2bi(input_sig_duration_ms,prefixLen,'right-msb');
+    input_sig_duration_ns = fix(input_sig_duration*1000000);
+    input_sig_duration_ns_bin = de2bi(input_sig_duration_ns,prefixLen,'right-msb');
     
-    if input_sig_duration >= 24*3600
-        status = 'ERROR: signal must be < than 24h!';
+    if input_sig_duration >= 40*3600
+        status = 'ERROR: signal must be < than 40h!';
         return
     end
     
@@ -33,7 +33,7 @@ function status = addWatermark(file_path)
     wm_sig = wm_amplitude * sin(2*pi*wm_freq.*t);
     
     %-- add prefix data :
-    wm_sig = [input_sig_duration_ms_bin*prefixAmplitude,wm_sig];
+    wm_sig = [input_sig_duration_ns_bin*prefixAmplitude,wm_sig];
        
     %%-----------------------------------
     %-- Cleaning input sound at WM frequency :
@@ -49,13 +49,15 @@ function status = addWatermark(file_path)
     %-- Applying Watermark :
     filtered_input_sig = [zeros(1,prefixLen),filtered_input_sig];
     output_sig = filtered_input_sig + wm_sig;
-    
     %sound(output_sig,Fs);
     %showSpectrum(output_sig,Fs);
     %showFFT(output_sig,Fs);
 
     %-----------------------------------
     %-- Outputing watermarked sound :
+    
+    % normalizing the output signal between -1 and 1 
+    output_sig = output_sig./(max(abs(output_sig)));
     
     %audiowrite(sprintf('sounds/output/%s.wav',fileName),output_sig,Fs);
     audiowrite(sprintf('%s/%s_wm.wav',filePath,fileName),output_sig,Fs);
