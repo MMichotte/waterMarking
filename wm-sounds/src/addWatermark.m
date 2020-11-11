@@ -57,6 +57,7 @@ function status = addWatermark(file_path)
     %-----------------------------------
     %-- Outputing watermarked sound :
     
-    audiowrite(sprintf('sounds/output/%s.wav',fileName),output_sig,Fs);
+    %audiowrite(sprintf('sounds/output/%s.wav',fileName),output_sig,Fs);
+    audiowrite(sprintf('%s/%s_wm.wav',filePath,fileName),output_sig,Fs);
     status = 'Signal successfully marked!';
 end
