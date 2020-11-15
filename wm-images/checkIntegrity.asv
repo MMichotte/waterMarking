@@ -1,0 +1,34 @@
+function checkIntegrity(Path_watermarkedImage,Path_OriginalImage)
+
+watermarkedImage=imread(Path_watermarkedImage);
+image_extracted=mod(watermarkedImage,2); % division modulaire image watermarked pour obtenir tous ses LSB
+
+
+% check the integrity of the watermark
+
+original_wm=imread(Path_OriginalImage);
+temp1=imresize(original_wm,[1000 1000]);
+% checking the d
+if (size(temp2,3)==3)
+    binWm_image=imbinarize(rgb2gray(temp2)); % converting rbg to binary 
+else
+    binWm_image=imbinarize(temp2); % converting rbg to binary 
+end
+bin_originalWm=imbinarize(rgb2gray(temp1)); % conversion image tatouee pour une comparaison.
+
+try 
+
+    if image_extracted==bin_originalWm
+    disp('Watermark not altered!')
+    return
+
+    else 
+    disp('Watermark altered!')
+    return
+
+    end
+catch error
+    disp('Watermark altered!');
+    return;
+end
+end
