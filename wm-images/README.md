@@ -15,7 +15,7 @@
 ### Extraction et vérification du watermark
 
 1. Récupération de l'image.
-2. Extraction des LSB de l'image,ceux ci devraient l'image qui a été tatouée.
+2. Extraction des LSB de l'image,ceux ci devraient constituer l'image qui a été tatouée.
 3. Comparaison des bits extraits avec l'image tatouée à la base (comparaison bit par bit). Tout logiquement,
    - ✅ Si les images sont égales alors on considère l'image comme **authentique** .
    - ❌ Si les images ne sont pas égales, alors on considère l'image comme étant **non-authentique**.
