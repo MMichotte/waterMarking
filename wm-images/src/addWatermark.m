@@ -2,19 +2,12 @@ function addWatermark(Path_imageSource,Path_watermark)
 
 clc; close all;
 
-source=imread(Path_imageSource);
-temp1=imresize(source,[1000, 1000]); % redimensionnement de l_image pour mener à bien le tatouage
-
-
-if (size(temp1,3)==3)
-    graySource=rgb2gray(temp1); % conversion de l_image en N/B (2D)
-else
-    graySource=temp1;
-end
+initial=imread(Path_imageSource);
+source=imresize(initial,[1000, 1000]); % redimensionnement de l_image pour mener à bien le tatouage
 
 figure
 subplot(1,2,1)
-imshow(graySource); % displaying objective image
+imshow(source); % displaying objective image
 title('Objective image');
 
 
@@ -35,9 +28,8 @@ end
 subplot(1,2,2);
 imshow(binWm_image) % displaying image to be hidden
 title('image to be hidden');
-
-binWm_image=double(binWm_image); 
-r=double(graySource-mod(graySource,2)); % suppression des LSB de l_image de base 
+ 
+r=double(source-mod(source,2)); % suppression des LSB de l_image de base 
 finalImage=uint8(r+binWm_image); % remplacement des LSB de l_image de base par les bits de l_image à tatouer 
 
 figure

@@ -7,12 +7,10 @@
 1. Récupération de l'image d'entrée.
 2. Récupération de l'image à tatouer.
 3. Redimensionnement des deux images pour un tatouage correct.
-4. Conversion de l'image à tatouer en N/B et Binaire.
-5. Suppression des LSB de l'image d'entrée (cela n'a pas d'impact suyr le rendu de l'image)
+4. Conversion de l'image à tatouer en N/B et ensuite en Binaire.
+5. Suppression des LSB de l'image d'entrée (cela n'a pas d'impact sur le rendu de l'image)
 6. Remplacement des bits supprimés par ceux de l'image à tatouer.
 7. Ecriture de l'image résultante dans l'aborescence (fichier WatermarkedImage).
-
-:warning: **Indications:** L'image sera automatiquement convertie en N/B avant watermarking !
 
 ### Extraction et vérification du watermark
 
