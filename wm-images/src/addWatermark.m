@@ -3,7 +3,7 @@ function status = addWatermark(Path_imageSource,Path_watermark)
 source=imread(Path_imageSource);
 wm_image=imread(Path_watermark); 
 
-% vérification de la taille des l'image
+% vÃ©rification de la taille des l_image
 sourceSize = size(source(:,:,1));
 wmSize = size(wm_image);
 
@@ -36,6 +36,7 @@ figure
 imshow(finalImage)
 title('Invisble watermarked Image');
 %}
+
 imwrite(finalImage, 'watermarkedImage.png');
 
 status = 'Image successfully marked!';
