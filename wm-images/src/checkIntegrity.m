@@ -1,4 +1,4 @@
-function checkIntegrity(Path_watermarkedImage,Path_OriginalImage)
+function status = checkIntegrity(Path_watermarkedImage,Path_OriginalImage)
 
 % extraction du watermark de l_image renvoyé par un tiers
 
@@ -7,14 +7,12 @@ image_extracted=mod(watermarkedImage,2); % division modulaire image watermarked 
 
 
 original_wm=imread(Path_OriginalImage);
-temp1=imresize(original_wm,[1000 1000]); % modification de la taille du watermark
 
 % vérifie la dimension de l_image
-
-if (size(temp1,3)==3)
-    bin_originalWm=imbinarize(rgb2gray(temp1)); % conversion image tatouee pour une comparaison.
+if (size(original_wm,3)==3)
+    bin_originalWm=imbinarize(rgb2gray(original_wm)); % conversion image tatouee pour une comparaison.
 else
-    bin_originalWm=imbinarize(temp1); % conversion image tatouee pour une comparaison.
+    bin_originalWm=imbinarize(original_wm); % conversion image tatouee pour une comparaison.
 end
 
 
@@ -22,16 +20,16 @@ end
 try 
 
     if image_extracted==bin_originalWm
-    disp('Watermark not altered!')
+    status = 'Watermark not altered!';
     return
 
     else 
-    disp('Watermark altered!')
+    status = 'Watermark altered!';
     return
 
     end
 catch error
-    disp('Watermark altered!');
+    status = 'Watermark altered!';
     return;
 end
 end

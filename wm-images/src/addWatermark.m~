@@ -1,42 +1,46 @@
 function status = addWatermark(Path_imageSource,Path_watermark)
 
+clc; close all;
+
 source=imread(Path_imageSource);
-wm_image=imread(Path_watermark); 
-
-% vérification de la taille des l'image
-sourceSize = size(source(:,:,1));
-wmSize = size(wm_image);
-
-if (sourceSize ~= wmSize)
-    status = 'Error: the images have to have the same size!';
-    return;
-end
-
-% conversion de l_image en Binaire 
-if (size(wm_image,3)==3)
-    binWm_image=imbinarize(rgb2gray(wm_image));  
-else
-    binWm_image=imbinarize(wm_image); 
-end
 
 figure
 subplot(1,2,1)
 imshow(source); % displaying objective image
-title('Source image');
+title('Objective image');
+
+
+% traitement de l_image Ã  tatouer
+wm_image=imread(Path_watermark); 
+temp2=imresize(wm_image,[1000, 1000]); % redimensionnement de l_image pour mener Ã  bien le tatouage
+
+% vérification de la taille des l'image
+sourceSize = size(initial(:,:,1));
+wmSize = size(wm_image);
+
+if (sourceSize ~= wmSize)
+    status = 'Erreur: les images doivent avoir la même taille!';
+    return;
+end
+
+% conversion de l_image en Binaire 
+if (size(temp2,3)==3)
+    binWm_image=imbinarize(rgb2gray(temp2));  
+else
+    binWm_image=imbinarize(temp2); 
+end
+
+
 subplot(1,2,2);
 imshow(binWm_image) % displaying image to be hidden
-title('Watermark image');
-
+title('image to be hidden');
  
 r=double(source-mod(source,2)); % suppression des LSB de l_image de base 
 finalImage=uint8(r+binWm_image); % remplacement des LSB de l_image de base par les bits de l_image Ã  tatouer 
 
-%{
 figure
 imshow(finalImage)
 title('Invisble watermarked Image');
-%}
 imwrite(finalImage, 'watermarkedImage.png');
 
-status = 'Image successfully marked!';
 end
