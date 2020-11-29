@@ -24,6 +24,7 @@
   - [Morgan Valentin](#morgan-valentin)
   - [Trésor Tekadam](#trésor-tekadam)
 
+<div style="page-break-after: always"></div>
 
 ## Introduction
 Un watermark ou tatouage numérique est un signal ou une information ajoutée à un signal source afin de pouvoir authentifier celui-ci sans pour autant le modifier de manière trop importante. 
@@ -104,4 +105,5 @@ Aucune librairies externe a été utilisée.
 ### Morgan Valentin
 ### Trésor Tekadam
 
+---
 [^1]: La durée du signal converti en nano-secondes étant stocké sur 40 bits, il a fallu limiter la durée maximale du son afin d'éviter un buffer-overflow. 
