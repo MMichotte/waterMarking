@@ -115,7 +115,8 @@ Nous n'avons pas utlisé de librairies pour réaliser cette partie
 5. Ajout du `wm` dans le `signal d'entrée`.
 6. Écriture du signal dans un nouveau fichier.
 
-:warning: **Conditions:** le signal ne peut pas durer plus de **40h**[^1]!
+:warning: **Conditions:** le signal ne peut pas durer plus de **40h**!
+> La durée du signal converti en nano-secondes étant stocké sur 40 bits, il a fallu limiter la durée maximale du son afin d'éviter un buffer-overflow.
 
 ##### Extraction et vérification du watermark
 
@@ -175,7 +176,3 @@ J'ai pris pas mal de temps à comprendre ce qui était demandé de réaliser au 
 Le seul point négatif de ce projet, c'est qu'on à l'habitude à l'ephec, d'avoir des projets très détaillés et encadrés par les professeurs. Le fait que le projet soit libre m'a causé pas mal de recherches supplémentaires non prévue qui, avec le charge de travail provenant des autres cours (labo de séurité à rendre chaque 2 semaines, projet d'intégration, projet de base de données,...) était compliqué à gérer. Heureusement qu'on était 5 sur ce projet.
 
 ### Trésor Tekadam
-
----
-
-[^1]: La durée du signal converti en nano-secondes étant stocké sur 40 bits, il a fallu limiter la durée maximale du son afin d'éviter un buffer-overflow.
