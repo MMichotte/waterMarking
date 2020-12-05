@@ -102,7 +102,7 @@ Nous n'avons pas utlisé de librairies pour réaliser cette partie
 
 ## II. watermarking sur des sons
 
-⚠️ Nécessite la `communications toolbox` en plus des toolboxs prévue pour ce cours. 
+⚠️ Nécessite la `communications toolbox` en plus des toolboxs prévues pour ce cours. 
 
 #### Méthodologie
 
