@@ -170,6 +170,10 @@ Avoir des consignes très vagues et une "carte blanche" quant à la réalisation
 
 ### Morgan Valentin
 
+J'ai pris pas mal de temps à comprendre ce qui était demandé de réaliser au niveau du watermarking car je n'avais jamais ententu parlé d'injection d'image dans une autre image. Mais finalement, après quelques réunions entre nous, j'ai vite compris le principe.
+
+Le seul point négatif de ce projet, c'est qu'on à l'habitude à l'ephec, d'avoir des projets très détaillés et encadrés par les professeurs. Le fait que le projet soit libre m'a causé pas mal de recherches supplémentaires non prévue qui, avec le charge de travail provenant des autres cours (labo de séurité à rendre chaque 2 semaines, projet d'intégration, projet de base de données,...) était compliqué à gérer. Heureusement qu'on était 5 sur ce projet.
+
 ### Trésor Tekadam
 
 ---
