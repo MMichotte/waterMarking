@@ -166,6 +166,9 @@ Ce projet m'a permis d'apprendre le fonctionnement réel du watermarking, chose 
 Avoir des consignes très vagues et une "carte blanche" quant à la réalisation du projet m'a initialement un peu perturbé. En effet, il m'était assez difficile de voir à quel point il fallait creuser la matière afin de satisfaire la demande du professeur. Encore à l'écriture de ce rapport, je ne sais toujours pas dire si notre projet est trop léger, satisfaisant ou trop complexe. 
 
 ### Patrick Tchoupe
+Au début je me disais que ce projet allait être compliqué à réaliser car je ne savais pas réellement ce qu'il fallait réaliser au niveau du watermarking. Mais après notre premier entretien avec le professeur, les tâches à réaliser étaient plus claires.
+
+Les recherches et documentations sur le sujet du watermarking sur une image m'ont permises de découvrir de nouvelles notions très interessantes telle que la stéganographie, qui est l'art de la dissimulation d'un message dans un autre et le choix a été fait d'utiliser la méthode des bits de poids faible.
 
 ### Olivier Niyonkuru
 
