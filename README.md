@@ -5,16 +5,19 @@
 - [Introduction](#introduction)
 - [Répartition des tâches](#répartition-des-tâches)
 - [Nos solutions](#nos-solutions)
-  - [watermarking sur des images](#watermarking-sur-des-images)
+- [I. watermarking sur des images](#i-watermarking-sur-des-images)
     - [Méthodologie](#méthodologie)
-    - [Librairies utilisée](#librairies-utilisée)
+      - [Ajout du watermark :](#ajout-du-watermark-)
+    - [Extraction et vérification du watermark :](#extraction-et-vérification-du-watermark-)
+    - [Utilisation :](#utilisation-)
+    - [Librairies utilisées](#librairies-utilisées)
     - [Pistes d'améliorations](#pistes-daméliorations)
-  - [watermarking sur des sons](#watermarking-sur-des-sons)
+- [II. watermarking sur des sons](#ii-watermarking-sur-des-sons)
     - [Méthodologie](#méthodologie-1)
       - [Ajout du watermark](#ajout-du-watermark)
       - [Extraction et vérification du watermark](#extraction-et-vérification-du-watermark)
-      - [Utilisation :](#utilisation-)
-    - [Librairies utilisée](#librairies-utilisée-1)
+      - [Utilisation :](#utilisation--1)
+    - [Librairies utilisée](#librairies-utilisée)
     - [Pistes d'améliorations](#pistes-daméliorations-1)
 - [Conclusions](#conclusions)
   - [Générale](#générale)
@@ -99,6 +102,8 @@ Nous n'avons pas utlisé de librairies pour réaliser cette partie
 
 ## II. watermarking sur des sons
 
+⚠️ Nécessite la `communications toolbox` en plus des toolboxs prévue pour ce cours. 
+
 #### Méthodologie
 
 ##### Ajout du watermark
@@ -150,8 +155,14 @@ Aucune librairie externe a été utilisée.
 ## Conclusions
 
 ### Générale
+Bien qu'initialement nous n'avions aucune idée sur la manière d'implémenter un watermark sur du son ou sur des images, après quelques recherches il s'est avéré qu'il existait plusieurs techniques utilisant différents algorithmes mathématiques plus ou moins complexes. Afin d'éviter d'utiliser ces algorithmes dont on ne comprenait pas l'entièreté ou pour lesquelles on n'avait pas spécialement le temps de les comprendre, nous avons décidé de tenter d'implémenter le watermarking à notre propre manière. 
+
+Nous avons dès lors complètement séparé le watermarking sur image et le watermarking sur le son et utilisé deux techniques différentes. Nous pensons être arrivé à un résultat concluant même si nous savons pertinemment que nos techniques ne sont pas optimales et peuvent très certainement être améliorées. 
 
 ### Martin Michotte
+Ce projet m'a permis d'apprendre le fonctionnement réel du watermarking, chose qu'au par avant je connaissais mais ne comprenais pas. Le fait de devoir l'implémenter par nous mêmes et avec nos propres moyen était très intéressant et m'a permis de parfaire mes connaissance en traitement de signaux. 
+
+Avoir des consignes très vagues et une "carte blanche" quant à la réalisation du projet m'a initialement un peu perturbé. En effet, il m'était assez difficile de voir à quel point il fallait creuser la matière afin de satisfaire la demande du professeur. Encore à l'écriture de ce rapport, je ne sais toujours pas dire si notre projet est trop léger, satisfaisant ou trop complexe. 
 
 ### Patrick Tchoupe
 

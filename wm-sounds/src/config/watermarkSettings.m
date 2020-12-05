@@ -8,7 +8,7 @@ prefixLen = 50;
 % Amplitude of the prefix bits (the lower the better) 
 prefixAmplitude = 0.001; 
 
-% Cutoff frequency for the lowPass filter
+% Cutoff frequency for the HighPass filter
 Fc = 10;
 
 % Frequency of the watermark signal
