@@ -179,3 +179,7 @@ J'ai pris pas mal de temps à comprendre ce qui était demandé de réaliser au 
 Le seul point négatif de ce projet, c'est qu'on à l'habitude à l'ephec, d'avoir des projets très détaillés et encadrés par les professeurs. Le fait que le projet soit libre m'a causé pas mal de recherches supplémentaires non prévue qui, avec le charge de travail provenant des autres cours (labo de séurité à rendre chaque 2 semaines, projet d'intégration, projet de base de données,...) était compliqué à gérer. Heureusement qu'on était 5 sur ce projet.
 
 ### Trésor Tekadam
+
+ce projet m'a permis d'apprendre beaucoup de choses sur les images et le son en général.Jusqu'à présent j'ai eu à faire du traitement d'images à l'aide des outils tel que photoshop sans vraiment comprendre ce qui se passe vraiment. Mais à travers ce projet j'ai maintenant une idée de comment les choses se passent derrière la scène
+
+le fait de n'avoir aucune restriction sur la manière de procéder m'a permis de beaucoup me documenter sur le sujet et d'en apprendre davantage 
