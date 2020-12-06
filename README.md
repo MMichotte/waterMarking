@@ -172,6 +172,8 @@ Les recherches et documentations sur le sujet du watermarking sur une image m'on
 
 ### Olivier Niyonkuru
 
+Personnellement, je ne voyais pas comment commencer ce projet car j'étais pas à l'aise avec les technologies qu'on pensait pour utiliser (python et matlab) pour au final
+réaliser le watermarking. J’espère que les compétences développées durant ce projet me serviront dans ma vie professionnelle et/ou dans des projets personnels.   
 ### Morgan Valentin
 
 J'ai pris pas mal de temps à comprendre ce qui était demandé de réaliser au niveau du watermarking car je n'avais jamais ententu parlé d'injection d'image dans une autre image. Mais finalement, après quelques réunions entre nous, j'ai vite compris le principe.
