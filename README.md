@@ -185,3 +185,9 @@ Le seul point négatif de ce projet, c'est qu'on à l'habitude à l'ephec, d'avo
 ce projet m'a permis d'apprendre beaucoup de choses sur les images et le son en général.Jusqu'à présent j'ai eu à faire du traitement d'images à l'aide des outils tel que photoshop sans vraiment comprendre ce qui se passe vraiment. Mais à travers ce projet j'ai maintenant une idée de comment les choses se passent derrière la scène
 
 le fait de n'avoir aucune restriction sur la manière de procéder m'a permis de beaucoup me documenter sur le sujet et d'en apprendre davantage 
+
+
+---
+
+## Sources 
+- https://medium.com/intrasonics/hiding-data-in-sound-c8db3de5d6e0
