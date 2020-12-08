@@ -191,3 +191,5 @@ le fait de n'avoir aucune restriction sur la manière de procéder m'a permis de
 
 ## Sources 
 - https://medium.com/intrasonics/hiding-data-in-sound-c8db3de5d6e0
+- https://nl.mathworks.com/matlabcentral/fileexchange/64535-lsb-watermarking?s_tid=answers_rc2-1_p4_BOTH
+
