@@ -116,7 +116,7 @@ Nous n'avons pas utlisé de librairies pour réaliser cette partie
 6. Écriture du signal dans un nouveau fichier.
 
 :warning: **Conditions:** le signal ne peut pas durer plus de **40h**!
-> La durée du signal converti en nano-secondes étant stocké sur 40 bits, il a fallu limiter la durée maximale du son afin d'éviter un buffer-overflow.
+> La durée du signal converti en micro-secondes étant stocké sur 40 bits, il a fallu limiter la durée maximale du son afin d'éviter un buffer-overflow.
 
 ##### Extraction et vérification du watermark
 
